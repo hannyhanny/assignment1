@@ -50,12 +50,37 @@ average_c3 <- colMeans(data_class3)
 average_data <- data.frame(average, average_c1, average_c2, average_c3)
 
 # problem2_a
-isPerfectPower <- function(a, b) {
-  if (is.integer(as.integer(a^(1/b))) == TRUE) {
-    return(list("isPerfect" = TRUE, "root" = a^(1/b)))
+isPerfectPower <- function(n,p) {
+  r_max <- as.integer(sqrt(n))
+  r_seq <- (1: r_max)
+  n_seq <- r_seq^p
+  n_root <- which(n_seq == n)
+  if (length(n_root) > 0) {
+    return(list("isPerfect" = TRUE, "root" = r_seq[n_root]))
   }
-  return(list("isPerfec" = FALSE, "root" = "no integer root"))
+  else {
+    return(list("isPerfect" = FALSE, "root" = "no integer root"))
+  }
 }
+
+# problem2_b
+findRootPower<-function(n) {
+  p <-2
+  while (isPerfectPower(n,p)[1] == FALSE) {
+    p <- p+1
+  }
+  return(paste(n, "=", isPerfectPower(n,p)[2], "^", p))
+}
+findRootPower(27)  # "27 = 3 ^ 3"
+findRootPower(13060694016)  # "13060694016 = 6 ^ 13"
+findRootPower(7776)  # "7776 = 6 ^ 5"
+findRootPower(170859375)  # "170859375 = 15 ^ 7"
+findRootPower(58247422)  # is not perfect
+findRootPower(94143178827)  # "94143178827 = 3 ^ 23"
+
+# problem3_a
+
+
 
 
 
